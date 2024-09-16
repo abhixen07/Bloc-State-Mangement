@@ -1,0 +1,53 @@
+import 'package:bloc_state/bloc/counter/counter_bloc.dart';
+import 'package:bloc_state/bloc/counter/counter_event.dart';
+import 'package:bloc_state/bloc/counter/counter_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class CounterScreen extends StatefulWidget {
+  const CounterScreen({super.key});
+
+  @override
+  State<CounterScreen> createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar
+        (
+        title: Text('Counter Screen'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //just like consumer in provider here we user bloc provider
+          //to update the state on ui
+          BlocBuilder<CounterBloc,CounterState>(
+            builder: (context, state) {
+              return Center(child: Text(state.counter.toString(), style: TextStyle(fontSize: 60),));
+            },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ElevatedButton(onPressed: () {
+                //syntax to trigger event
+                context.read<CounterBloc>().add(IncrementCounter());
+              }, child: Text('Incremenet')),
+              SizedBox(width: 20,),
+              ElevatedButton(onPressed: () {
+                context.read<CounterBloc>().add(DecrementCounter());
+              }, child: Text('Decrement'))
+            ],
+
+          )
+
+        ],
+      ),
+    );
+  }
+}
