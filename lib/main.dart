@@ -1,12 +1,14 @@
 import 'package:bloc_state/bloc/counter/counter_bloc.dart';  // Import the Counter Bloc
 import 'package:bloc_state/bloc/favourite_app/favourite_app_bloc.dart';
 import 'package:bloc_state/bloc/image_picker/image_picker_bloc.dart';  // Import the Image Picker Bloc
+import 'package:bloc_state/bloc/post/post_bloc.dart';
 import 'package:bloc_state/bloc/switch_example/switch_bloc.dart';  // Import the Switch Bloc
 import 'package:bloc_state/bloc/todo/to_do_bloc.dart';
 import 'package:bloc_state/equatable_test_state.dart';  // Import for state equality check (using Equatable)
 import 'package:bloc_state/repository/favourite_repository.dart';
 import 'package:bloc_state/utils/image_picker_utils.dart';  // Import utility class for image picker
 import 'package:bloc_state/view/favourite_app/favourite_app_screen.dart';
+import 'package:bloc_state/view/posts/post_screen.dart';
 import 'package:bloc_state/view/todo/to_do_screen.dart';
 import 'package:flutter/material.dart';  // Import Flutter material widgets
 import 'package:flutter_bloc/flutter_bloc.dart';  // Import Flutter BLoC package for state management
@@ -48,6 +50,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FavouriteBloc(FavouriteRepository())
         ),
+        // Providing PostsBloc to the widget tree
+        BlocProvider(
+          create: (context) => PostBloc()
+        ),
       ],
       // Wrapping the MaterialApp with MultiBlocProvider
       child: MaterialApp(
@@ -60,7 +66,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,  // Opting in for Material 3 design
         ),
         // Setting the home screen to the ImagePickerScreen
-        home: const FavouriteScreen(),
+        home: const PostScreen(),
       ),
     );
   }
