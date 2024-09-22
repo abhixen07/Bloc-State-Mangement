@@ -9,3 +9,9 @@ abstract class PostEvent extends Equatable {
 
 /// Event to indicate that posts should be fetched from the API
 class PostFetched extends PostEvent {}
+
+/// Event to indicate that posts should be Searched
+class SearchItem extends PostEvent {
+  final String stSearch;
+  SearchItem(this.stSearch);
+}

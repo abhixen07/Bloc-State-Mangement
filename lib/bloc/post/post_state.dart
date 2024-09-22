@@ -11,14 +11,21 @@ class PostState extends Equatable {
   // List of posts fetched from the API
   final List<PostModel> postList;
 
+  final List<PostModel> tempPostList;
+
   // Message used to show error or success information
   final String message;
+
+  // Message used to show error or success information
+  final String searchMessage;
 
   /// Constructor for initializing the PostState with default or provided values
   const PostState({
     this.postStatus = PostStatus.loading,  // Default status is loading
     this.postList = const <PostModel>[],   // Default is an empty list of posts
+    this.tempPostList = const <PostModel>[],   // Temporary list of posts
     this.message = '',                     // Default is an empty message
+    this.searchMessage = '',                     // Default is an empty message
   });
 
   /// Method to create a new PostState by copying the current state and
@@ -26,12 +33,16 @@ class PostState extends Equatable {
   PostState copyWith({
     PostStatus? postStatus,
     List<PostModel>? postsList,
+    List<PostModel>? tempPostList,
     String? message,
+    String? searchMessage,
   }) {
     return PostState(
       postStatus: postStatus ?? this.postStatus,   // Use provided status or keep current
       postList: postsList ?? this.postList,        // Use provided post list or keep current
+      tempPostList: tempPostList ?? this.postList,        // Use provided post list or keep current
       message: message ?? this.message,            // Use provided message or keep current
+      searchMessage: searchMessage ?? this.searchMessage,            // Use provided message or keep current
     );
   }
 
@@ -42,5 +53,5 @@ class PostState extends Equatable {
 
   /// Ensures PostState objects can be compared based on their properties
   @override
-  List<Object> get props => [postStatus, postList, message];
+  List<Object> get props => [postStatus, postList, message, tempPostList,searchMessage];
 }
